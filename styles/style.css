@@ -1,0 +1,7 @@
+#map {
+    width: 512px;
+    height: 256px;
+}
+.ol-attribution a {
+    color: black;
+}
