@@ -31,3 +31,12 @@ var map = new ol.Map({
         }
     })
 });
+
+map.on('singleclick', function(e) {
+    var feature = map.forEachFeatureAtPixel(e.pixel, function(feature) {
+      return feature;
+    });
+    var infoElement = document.getElementById('info');
+    infoElement.innerHTML = feature ? feature.get('title') : '';
+  });
+  
