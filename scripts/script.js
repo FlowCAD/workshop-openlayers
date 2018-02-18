@@ -28,9 +28,12 @@ var map = new ol.Map({
     }),
     controls: ol.control.defaults({
         attributionOptions: {
-            collapsible: false
+            collapsible: true
         }
-    })
+    }),
+    controls: ol.control.defaults().extend([
+        new ol.control.ScaleLine()
+    ])
 });
 
 map.on('singleclick', function (e) {
