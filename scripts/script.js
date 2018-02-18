@@ -26,13 +26,26 @@ var map = new ol.Map({
         center: ol.proj.fromLonLat([1.4407, 43.5974]),
         zoom: 13
     }),
-    controls: ol.control.defaults({
-        attributionOptions: {
-            collapsible: true
-        }
-    }),
     controls: ol.control.defaults().extend([
-        new ol.control.ScaleLine({className: 'ol-scale-line', target: document.getElementById('scale-line')})
+        new ol.control.ScaleLine({
+            className: 'ol-scale-line',
+            target: document.getElementById('scale-line')
+        })
+    ]),
+    interactions: ol.interaction.defaults().extend([
+        new ol.interaction.Select({
+            style: new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: 5,
+                    fill: new ol.style.Fill({
+                        color: 'cyan'
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: 'black'
+                    })
+                })
+            })
+        })
     ])
 });
 
