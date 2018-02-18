@@ -3,6 +3,7 @@ A big workshop in Javascript for OpenLayers.
 
 ## References
 * https://openlayers.org/workshop/fr/
+* https://openlayers.org/workshop/en/
 * https://openlayers.org/
 
 ## Setup
