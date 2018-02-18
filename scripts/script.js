@@ -3,6 +3,22 @@ var map = new ol.Map({
     layers: [
         new ol.layer.Tile({
             source: new ol.source.OSM()
+        }),
+
+        new ol.layer.Vector({
+            title: 'Earthquakes',
+            source: new ol.source.Vector({
+                url: '/data/7day-M2.5.json',
+                format: new ol.format.GeoJSON()
+            }),
+            style: new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: 3,
+                    fill: new ol.style.Fill({
+                        color: 'red'
+                    })
+                })
+            })
         })
     ],
     view: new ol.View({
