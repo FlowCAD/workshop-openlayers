@@ -32,7 +32,7 @@ var map = new ol.Map({
         }
     }),
     controls: ol.control.defaults().extend([
-        new ol.control.ScaleLine()
+        new ol.control.ScaleLine({className: 'ol-scale-line', target: document.getElementById('scale-line')})
     ])
 });
 
