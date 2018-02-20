@@ -27,13 +27,18 @@ var styleSelected = new ol.style.Style({
     })
 });
 
-var draw = new ol.interaction.Draw({
+// Draw Feature
+/*var draw = new ol.interaction.Draw({
     source: source,
     type: 'Point'
-});
+});*/
 
 var select = new ol.interaction.Select({
     style: styleSelected
+});
+
+var modify = new ol.interaction.Modify({
+    features: select.getFeatures()
 });
 
 var map = new ol.Map({
@@ -69,7 +74,7 @@ var map = new ol.Map({
             target: document.getElementById('scale-line')
         })
     ]),
-    interactions: ol.interaction.defaults().extend([draw, select])
+    interactions: ol.interaction.defaults().extend([/*draw, */select, modify])
 });
 
 map.on('singleclick', function (e) {
@@ -84,4 +89,4 @@ draw.on('drawend', function(evt){
     var feature = evt.feature;
     var p = feature.getGeometry();
     console.log(p.getCoordinates());
-})
+});
