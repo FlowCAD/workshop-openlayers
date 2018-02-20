@@ -48,6 +48,38 @@ var map = new ol.Map({
             source: new ol.source.OSM()
         }),
         new ol.layer.Vector({
+            title: 'Buildings',
+            source: new ol.source.Vector({
+                url: '/data/buildings.kml',
+                format: new ol.format.KML({
+                    extractStyles: false
+                })
+            }),
+            style: (function () {
+                var stroke = new ol.style.Stroke({
+                    color: 'black'
+                });
+                var textStroke = new ol.style.Stroke({
+                    color: '#fff',
+                    width: 3
+                });
+                var textFill = new ol.style.Fill({
+                    color: '#000'
+                });
+                return function (feature, resolution) {
+                    return [new ol.style.Style({
+                        stroke: stroke,
+                        text: new ol.style.Text({
+                            font: '12px Calibri,sans-serif',
+                            text: feature.get('key'),
+                            fill: textFill,
+                            stroke: textStroke
+                        })
+                    })];
+                };
+            })()
+        }),
+        new ol.layer.Vector({
             title: 'Earthquakes',
             source: source,
             style: styleBasic
@@ -65,8 +97,8 @@ var map = new ol.Map({
         })*/
     ],
     view: new ol.View({
-        center: ol.proj.fromLonLat([1.4407, 43.5974]),
-        zoom: 13
+        center: ol.proj.fromLonLat([-122.79264450073244, 42.30975194250527]),
+        zoom: 16
     }),
     controls: ol.control.defaults().extend([
         new ol.control.ScaleLine({
@@ -74,7 +106,7 @@ var map = new ol.Map({
             target: document.getElementById('scale-line')
         })
     ]),
-    interactions: ol.interaction.defaults().extend([/*draw, */select, modify])
+    interactions: ol.interaction.defaults().extend([ /*draw, */ select, modify])
 });
 
 map.on('singleclick', function (e) {
@@ -85,8 +117,8 @@ map.on('singleclick', function (e) {
     infoElement.innerHTML = feature ? feature.get('title') : '';
 });
 
-draw.on('drawend', function(evt){
+/*draw.on('drawend', function(evt){
     var feature = evt.feature;
     var p = feature.getGeometry();
     console.log(p.getCoordinates());
-});
+});*/
