@@ -1,5 +1,5 @@
 # OpenLayers Workshop
-A big workshop in Javascript for OpenLayers. 
+A big workshop in Javascript for OpenLayers 4. 
 
 ## References
 * https://openlayers.org/workshop/fr/
@@ -18,4 +18,4 @@ Now you're ready to start the workshop development server.  This serves up the [
 
     npm start
 
-This will start a development server where you can read the workshop documentation and work through the exercises.  You should be able to confirm that things are working by seeing an alert pop up at {{book.workshopUrl}}/.  You can read through the workshop documentation at {{book.workshopUrl}}/doc/.
+This will start a development server where you can read the workshop documentation and work through the exercises.
