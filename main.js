@@ -8,6 +8,8 @@ import VectorLayer from 'ol/layer/vector';
 import VectorSource from 'ol/source/vector';
 import Feature from 'ol/feature';
 import Point from 'ol/geom/point';
+import Style from 'ol/style/style';
+import IconStyle from 'ol/style/icon';
 
 const map = new Map({
   target: 'map-container',
@@ -29,6 +31,12 @@ const vector = new VectorLayer({
   source: position
 });
 map.addLayer(vector);
+
+vector.setStyle(new Style({
+  image: new IconStyle({
+    src: './data/marker.png'
+  })
+}));
 
 navigator.geolocation.getCurrentPosition(function(pos) {
     const coords = proj.fromLonLat([pos.coords.longitude, pos.coords.latitude]);
