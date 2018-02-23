@@ -10,6 +10,8 @@ import Feature from 'ol/feature';
 import Point from 'ol/geom/point';
 import Style from 'ol/style/style';
 import IconStyle from 'ol/style/icon';
+import Overlay from 'ol/overlay';
+import coordinate from 'ol/coordinate';
 
 const map = new Map({
   target: 'map-container',
@@ -38,8 +40,29 @@ vector.setStyle(new Style({
   })
 }));
 
-navigator.geolocation.getCurrentPosition(function(pos) {
-    const coords = proj.fromLonLat([pos.coords.longitude, pos.coords.latitude]);
-    map.getView().animate({center: coords, zoom: 11});
-    position.addFeature(new Feature(new Point(coords)));
+var overlay = new Overlay({
+  element: document.getElementById('popup-container'),
+  positioning: 'bottom-center',
+  offset: [0, -10]
+});
+map.addOverlay(overlay);
+
+navigator.geolocation.getCurrentPosition(function (pos) {
+  const coords = proj.fromLonLat([pos.coords.longitude, pos.coords.latitude]);
+  map.getView().animate({
+    center: coords,
+    zoom: 11
+  });
+  position.addFeature(new Feature(new Point(coords)));
+});
+
+map.on('click', function (e) {
+  overlay.setPosition();
+  var features = map.getFeaturesAtPixel(e.pixel);
+  if (features) {
+    var coords = features[0].getGeometry().getCoordinates();
+    var hdms = coordinate.toStringHDMS(proj.toLonLat(coords));
+    overlay.getElement().innerHTML = 'You are here : ' + hdms;
+    overlay.setPosition(coords);
+  }
 });
