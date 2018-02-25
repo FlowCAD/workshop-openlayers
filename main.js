@@ -12,6 +12,7 @@ import Style from 'ol/style/style';
 import IconStyle from 'ol/style/icon';
 import Overlay from 'ol/overlay';
 import coordinate from 'ol/coordinate';
+import GeoJSON from 'ol/format/geojson';
 
 const map = new Map({
   target: 'map-container',
@@ -19,6 +20,12 @@ const map = new Map({
     new TileLayer({
       source: new XYZSource({
         url: 'http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg'
+      })
+    }),
+    new VectorLayer({
+      source: new VectorSource({
+        format: new GeoJSON(),
+        url: './data/countries.json'
       })
     })
   ],
@@ -40,13 +47,6 @@ vector.setStyle(new Style({
   })
 }));
 
-var overlay = new Overlay({
-  element: document.getElementById('popup-container'),
-  positioning: 'bottom-center',
-  offset: [0, -10]
-});
-map.addOverlay(overlay);
-
 navigator.geolocation.getCurrentPosition(function (pos) {
   const coords = proj.fromLonLat([pos.coords.longitude, pos.coords.latitude]);
   map.getView().animate({
@@ -56,7 +56,16 @@ navigator.geolocation.getCurrentPosition(function (pos) {
   position.addFeature(new Feature(new Point(coords)));
 });
 
-map.on('click', function (e) {
+// Popup initialization
+/*var overlay = new Overlay({
+  element: document.getElementById('popup-container'),
+  positioning: 'bottom-center',
+  offset: [0, -10]
+});
+map.addOverlay(overlay);*/
+
+// Popup content
+/*map.on('click', function (e) {
   overlay.setPosition();
   var features = map.getFeaturesAtPixel(e.pixel);
   if (features) {
@@ -65,4 +74,4 @@ map.on('click', function (e) {
     overlay.getElement().innerHTML = 'You are here : ' + hdms;
     overlay.setPosition(coords);
   }
-});
+});*/
