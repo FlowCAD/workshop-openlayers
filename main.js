@@ -15,6 +15,7 @@ import coordinate from 'ol/coordinate';
 import GeoJSON from 'ol/format/geojson';
 import sync from 'ol-hashed';
 import DragDrop from 'ol/interaction/draganddrop';
+import Modify from 'ol/interaction/modify';
 
 const map = new Map({
   target: 'map-container',
@@ -50,6 +51,9 @@ map.addInteraction(new DragDrop({
   formatConstructors: [GeoJSON]
 }));
 
+map.addInteraction(new Modify({
+  source: source
+}));
 
 // Position Marker
 const position = new VectorSource();
