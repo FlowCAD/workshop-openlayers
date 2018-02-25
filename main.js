@@ -14,6 +14,7 @@ import Overlay from 'ol/overlay';
 import coordinate from 'ol/coordinate';
 import GeoJSON from 'ol/format/geojson';
 import sync from 'ol-hashed';
+import DragDrop from 'ol/interaction/draganddrop';
 
 const map = new Map({
   target: 'map-container',
@@ -36,6 +37,21 @@ const map = new Map({
   })
 });
 
+
+// Empty data source for user'imports
+const source = new VectorSource();
+const layer = new VectorLayer({
+  source: source
+});
+map.addLayer(layer);
+
+map.addInteraction(new DragDrop({
+  source: source,
+  formatConstructors: [GeoJSON]
+}));
+
+
+// Position Marker
 const position = new VectorSource();
 const vector = new VectorLayer({
   source: position
@@ -57,6 +73,7 @@ navigator.geolocation.getCurrentPosition(function (pos) {
   position.addFeature(new Feature(new Point(coords)));
 });
 
+
 // Popup initialization
 /*var overlay = new Overlay({
   element: document.getElementById('popup-container'),
@@ -77,4 +94,6 @@ map.addOverlay(overlay);*/
   }
 });*/
 
+
+// Hashed URL
 sync(map);
