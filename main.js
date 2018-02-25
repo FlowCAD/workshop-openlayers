@@ -13,6 +13,7 @@ import IconStyle from 'ol/style/icon';
 import Overlay from 'ol/overlay';
 import coordinate from 'ol/coordinate';
 import GeoJSON from 'ol/format/geojson';
+import sync from 'ol-hashed';
 
 const map = new Map({
   target: 'map-container',
@@ -75,3 +76,5 @@ map.addOverlay(overlay);*/
     overlay.setPosition(coords);
   }
 });*/
+
+sync(map);
