@@ -16,8 +16,24 @@ import GeoJSON from 'ol/format/geojson';
 import sync from 'ol-hashed';
 import control from 'ol/control';
 import ScaleLine from 'ol/control/scaleline';
+import interaction from 'ol/interaction';
 import DragDrop from 'ol/interaction/draganddrop';
 import Modify from 'ol/interaction/modify';
+
+const source = new VectorSource();
+
+const importedlayer = new VectorLayer({
+  source: source
+});
+
+const dragndrop = new DragDrop({
+  source: source,
+  formatConstructors: [GeoJSON]
+});
+
+const modify = new Modify({
+  source: source
+});
 
 const map = new Map({
   target: 'map-container',
@@ -27,12 +43,13 @@ const map = new Map({
         url: 'http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg'
       })
     }),
-    new VectorLayer({
-      source: new VectorSource({
-        format: new GeoJSON(),
-        url: './data/countries.json'
-      })
-    })
+    // new VectorLayer({
+    //   source: new VectorSource({
+    //     format: new GeoJSON(),
+    //     url: './data/countries.json'
+    //   })
+    // }),
+    importedlayer
   ],
   view: new View({
     center: [0, 0],
@@ -40,25 +57,9 @@ const map = new Map({
   }),
   controls: new control.defaults().extend([
     new ScaleLine()
-  ])
+  ]),
+  interactions : new interaction.defaults().extend([dragndrop, modify])
 });
-
-
-// Empty data source for user'imports
-const source = new VectorSource();
-const layer = new VectorLayer({
-  source: source
-});
-map.addLayer(layer);
-
-map.addInteraction(new DragDrop({
-  source: source,
-  formatConstructors: [GeoJSON]
-}));
-
-map.addInteraction(new Modify({
-  source: source
-}));
 
 
 // Position Marker
