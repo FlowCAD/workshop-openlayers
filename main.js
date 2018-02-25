@@ -14,6 +14,8 @@ import Overlay from 'ol/overlay';
 import coordinate from 'ol/coordinate';
 import GeoJSON from 'ol/format/geojson';
 import sync from 'ol-hashed';
+import control from 'ol/control';
+import ScaleLine from 'ol/control/scaleline';
 import DragDrop from 'ol/interaction/draganddrop';
 import Modify from 'ol/interaction/modify';
 
@@ -35,7 +37,10 @@ const map = new Map({
   view: new View({
     center: [0, 0],
     zoom: 2
-  })
+  }),
+  controls: new control.defaults().extend([
+    new ScaleLine()
+  ])
 });
 
 
@@ -54,6 +59,7 @@ map.addInteraction(new DragDrop({
 map.addInteraction(new Modify({
   source: source
 }));
+
 
 // Position Marker
 const position = new VectorSource();
