@@ -120,3 +120,20 @@ map.addOverlay(overlay);*/
 
 // Hashed URL
 sync(map);
+
+
+// Clear function for the feature editor
+const clear = document.getElementById('clear');
+clear.addEventListener('click', function () {
+  source.clear();
+});
+
+
+// Download feature function
+const format = new GeoJSON({featureProjection: 'EPSG:3857'});
+const download = document.getElementById('download');
+source.on('change', function() {
+  const features = source.getFeatures();
+  const json = format.writeFeatures(features);
+  download.href = 'data:text/json;charset=utf-8,' + json;
+});

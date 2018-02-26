@@ -48,6 +48,24 @@
       border-width: 11px;
       margin-left: -11px;
     } */
+
+    /*Feature editor style*/
+    #tools {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    #tools a {
+      display: inline-block;
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.65);
+      cursor: pointer;
+    }
+
+    #clear:hover, #download:hover {
+      background: rgba(255, 255, 255, 1);
+    }
   </style>
 </head>
 
@@ -55,6 +73,10 @@
   <div id="map-container"></div>
   <!-- Popup div -->
   <!-- <div class="arrow_box" id="popup-container"></div> -->
+  <div id="tools">
+    <a id="clear">Clear</a>
+    <a id="download" download="features.json">Download</a>
+  </div>
 </body>
 
 </html>
