@@ -20,6 +20,7 @@ import Zoomslider from 'ol/control/zoomslider';
 import interaction from 'ol/interaction';
 import DragDrop from 'ol/interaction/draganddrop';
 import Modify from 'ol/interaction/modify';
+import Draw from 'ol/interaction/draw';
 
 const source = new VectorSource();
 const importedlayer = new VectorLayer({
@@ -58,6 +59,10 @@ const map = new Map({
       formatConstructors: [GeoJSON]
     }),
     new Modify({
+      source: source
+    }),
+    new Draw({
+      type: 'Polygon',
       source: source
     })
   ])
