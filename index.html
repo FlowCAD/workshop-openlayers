@@ -14,7 +14,8 @@
       font-family: sans-serif;
     }
 
-    .arrow_box {
+    /*Popup style*/
+    /* .arrow_box {
       position: relative;
       background: #eefaed;
       border: 3px solid #9cc49b;
@@ -46,13 +47,36 @@
       border-top-color: #6ce227;
       border-width: 11px;
       margin-left: -11px;
+    } */
+
+    /*Feature editor style*/
+    #tools {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    #tools a {
+      display: inline-block;
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.65);
+      cursor: pointer;
+    }
+
+    #clear:hover, #download:hover {
+      background: rgba(255, 255, 255, 1);
     }
   </style>
 </head>
 
 <body>
   <div id="map-container"></div>
-  <div class="arrow_box" id="popup-container"></div>
+  <!-- Popup div -->
+  <!-- <div class="arrow_box" id="popup-container"></div> -->
+  <div id="tools">
+    <a id="clear">Clear</a>
+    <a id="download" download="features.json">Download</a>
+  </div>
 </body>
 
 </html>
