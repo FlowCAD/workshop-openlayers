@@ -23,11 +23,15 @@ import Modify from 'ol/interaction/modify';
 import Draw from 'ol/interaction/draw';
 import Snap from 'ol/interaction/snap';
 
+
+// Definition of data file to import/D'n'D
 const source = new VectorSource();
 const importedlayer = new VectorLayer({
   source: source
 });
 
+
+// Map definition
 const map = new Map({
   target: 'map-container',
   layers: [
@@ -130,9 +134,11 @@ clear.addEventListener('click', function () {
 
 
 // Download feature function
-const format = new GeoJSON({featureProjection: 'EPSG:3857'});
+const format = new GeoJSON({
+  featureProjection: 'EPSG:3857'
+});
 const download = document.getElementById('download');
-source.on('change', function() {
+source.on('change', function () {
   const features = source.getFeatures();
   const json = format.writeFeatures(features);
   download.href = 'data:text/json;charset=utf-8,' + json;
