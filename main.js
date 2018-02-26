@@ -21,17 +21,7 @@ import DragDrop from 'ol/interaction/draganddrop';
 import Modify from 'ol/interaction/modify';
 
 const source = new VectorSource();
-
 const importedlayer = new VectorLayer({
-  source: source
-});
-
-const dragndrop = new DragDrop({
-  source: source,
-  formatConstructors: [GeoJSON]
-});
-
-const modify = new Modify({
   source: source
 });
 
@@ -58,7 +48,15 @@ const map = new Map({
   controls: new control.defaults().extend([
     new ScaleLine()
   ]),
-  interactions : new interaction.defaults().extend([dragndrop, modify])
+  interactions: new interaction.defaults().extend([
+    new DragDrop({
+      source: source,
+      formatConstructors: [GeoJSON]
+    }),
+    new Modify({
+      source: source
+    })
+  ])
 });
 
 
@@ -97,6 +95,7 @@ map.addOverlay(overlay);*/
 /*map.on('click', function (e) {
   overlay.setPosition();
   var features = map.getFeaturesAtPixel(e.pixel);
+  console.log(features);
   if (features) {
     var coords = features[0].getGeometry().getCoordinates();
     var hdms = coordinate.toStringHDMS(proj.toLonLat(coords));
