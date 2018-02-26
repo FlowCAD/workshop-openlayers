@@ -21,6 +21,7 @@ import interaction from 'ol/interaction';
 import DragDrop from 'ol/interaction/draganddrop';
 import Modify from 'ol/interaction/modify';
 import Draw from 'ol/interaction/draw';
+import Snap from 'ol/interaction/snap';
 
 const source = new VectorSource();
 const importedlayer = new VectorLayer({
@@ -63,6 +64,9 @@ const map = new Map({
     }),
     new Draw({
       type: 'Polygon',
+      source: source
+    }),
+    new Snap({
       source: source
     })
   ])
